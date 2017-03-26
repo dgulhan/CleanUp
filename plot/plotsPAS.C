@@ -4,7 +4,7 @@
 #include "TGraphErrors.h"
 #include "TColor.h"
 #include "TStyle.h"
-#include "/afs/cern.ch/user/d/dgulhan/workDir/private/thesisPlots/dijetpPb/utilities.h"
+#include "utilities.h"
 
 void prettyLegend(TLegend *legpp){
   legpp->SetFillColor(0);
