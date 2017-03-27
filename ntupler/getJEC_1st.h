@@ -65,11 +65,11 @@ class MCTruthResidual
      fitVsPt[istep][ieta] = (TF1*)fileResMC[istep]->Get(Form("fit2%d",ieta));
     } 
    }
-   fitVsEta[0] = new TF1("fitvseta0","(-3.89234e-03)*x*x+(-3.81491e-03)*x+ 1.01036e+00",-3,3);
-   fitVsEta[1] = new TF1("fitvseta1","(2.09011e-03)*x*x+(4.39518e-03)*x+9.94815e-01",-3,3);
-   fitVsEta[2] = new TF1("fitvseta2","(1.10732e-03)*x*x+(-2.04372e-03)*x+1.00347e+00",-3,3);
-   fitVsEta[3] = new TF1("fitvseta3","(9.90943e-04)*x*x+(-1.66243e-03)*x+ 1.00343e+00",-3,3);
-   fitVsEta[4] = new TF1("fitvseta4","(1.13988e-03)*x*x+(-9.65081e-04)*x+ 1.00361e+00",-3,3);
+   fitVsEta[0] = new TF1("fitvseta0","(-8.66933e-04)*x*x*x+(-3.43026e-03)*x*x+1.00985e+00",-3,3);
+   fitVsEta[1] = new TF1("fitvseta1","( 7.47059e-04)*x*x*x+(3.25265e-03)*x*x+9.93123e-01",-3,3);
+   fitVsEta[2] = new TF1("fitvseta2","(-3.48461e-04)*x*x*x+(1.73609e-03)*x*x+1.00252e+00",-3,3);
+   fitVsEta[3] = new TF1("fitvseta3","(-3.57022e-04)*x*x*x+(1.35455e-03)*x*x+1.00280e+00",-3,3);
+   fitVsEta[4] = new TF1("fitvseta4","(-2.49294e-04)*x*x*x+(1.39031e-03)*x*x+1.00320e+00",-3,3);
    fitResidualPt = new TF1("fitResidualPt","(-7.46377e-01)/x+1.00276e+00");
   }
   else if(fmode=="Pbp5"){
