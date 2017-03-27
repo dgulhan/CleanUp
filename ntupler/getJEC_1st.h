@@ -145,7 +145,7 @@ class MCTruthResidual
   if(fmode == "pPb5" || fmode == "Pbp5"){
     pt/=fitResidualPt->Eval(pt);
     if(fmode == "pPb5"){
-      if (pt > 185) return pt;
+      if (pt > 150) return pt;
       int ipt = 0;
       if(pt < 45 ) ipt = 0;
       if(pt >= 45 && pt < 65) ipt = 1;
