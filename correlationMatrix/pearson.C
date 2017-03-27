@@ -5,7 +5,7 @@
 #include "TColor.h"
 #include "TStyle.h"
 #include "ntdijet_smeared0.C"
-#include "/afs/cern.ch/user/d/dgulhan/workDir/private/thesisPlots/dijetpPb/utilities.h"
+#include "../plot/utilities.h"
 
 void pearson(){
   TFile * file = new TFile("../toyMC/distsPtSmearing_test5_pPb_boost_v4_noweight.root");

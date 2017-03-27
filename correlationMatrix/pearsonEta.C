@@ -5,7 +5,7 @@
 #include "TColor.h"
 #include "TStyle.h"
 #include "ntdijet_smeared0.C"
-#include "/afs/cern.ch/user/d/dgulhan/workDir/private/thesisPlots/dijetpPb/utilities.h"
+#include "../plot/utilities.h"
 
 void pearson(){
   //  ntdijet[ipt]->Draw(Form("-(jteta1sm*(1-2*(%.3f)*abs((jteta1sm+0.465)/3.))+jteta2sm*(1-2*(%.3f)*abs((jteta2sm+0.465)/3.)))/2.>>histEtaOffset%d",(6-((float)ipt))*2/1000.,(6-((float)ipt))*2/1000., ipt),Form("(jtpt1 > 30 && jtpt2 > 20 && acos(cos(jtphi1-jtphi2)) > (2*TMath::Pi()/3.) && (jtpt1+jtpt2)/2. >= %d && (jtpt1+jtpt2)/2.<%d)",ptlow[ipt],ptlow[ipt+1]));
