@@ -151,7 +151,7 @@ class MCTruthResidual
       if(pt >= 45 && pt < 65) ipt = 1;
       if(pt >= 65 && pt < 95) ipt = 2;
       if(pt >= 95 && pt < 135) ipt = 3;
-      if(pt >= 135 && pt < 185) ipt = 4;
+      if(pt >= 135 && pt < 150) ipt = 4;
       pt/=fitVsEta[ipt]->Eval(eta);
     }
   }
