@@ -73,16 +73,21 @@ class MCTruthResidual
    fitResidualPt = new TF1("fitResidualPt","(-7.46377e-01)/x+1.00276e+00");
   }
   else if(fmode=="Pbp5"){
-   nstep = 2;
+   nstep = 1;
    fileUnf[0] = new TFile("residualMCTruth/hists_Pbp.root");
    fitUnf[0][0] = (TF1*)fileUnf[0]->Get("fit_jtpt_dep0");
    for(int istep = 0; istep < nstep; istep++){
-    fileResMC[istep] = new TFile(Form("residualMCTruth/responseInEtaBinsPbp_yueshiL2L3_20170122_step%d.root",istep));
+    fileResMC[istep] = new TFile(Form("residualMCTruth/responseInEtaBinsPbp_yueshiL2L3_20170128_step%d.root",istep));
     for(int ieta = 0; ieta < nEta; ieta++){
      fitVsPt[istep][ieta] = (TF1*)fileResMC[istep]->Get(Form("fit2%d",ieta));
     }
    }
-   
+   fitVsEta[0] = new TF1("fitvseta0","(-7.98069e-04)*x*x*x+(-1.28720e-03)*x*x+(2.92503e-03)*x+(1.00243e+00 )");
+   fitVsEta[1] = new TF1("fitvseta1","(-2.30576e-04)*x*x*x+(5.03643e-03)*x*x+(2.30545e-03)*x+(9.87635e-01)");
+   fitVsEta[2] = new TF1("fitvseta2","(2.52492e-04)*x*x*x+(-7.56608e-04)*x*x+(-1.37451e-03)*x+(1.00309e+00)");
+   fitVsEta[3] = new TF1("fitvseta3","(-1.05427e-03)*x*x*x+(3.46250e-04)*x*x+(5.30411e-04)*x+(9.99666e-01)");
+   fitVsEta[4] = new TF1("fitvseta4","(-3.12681e-04)*x*x*x+(8.44498e-05)*x*x+(2.33284e-05)*x+(1.00136e+00)");
+
    fitResidualPt = new TF1("fitResidualPt","(-6.45411e-01)/x+1.00520e+00");
   }
   else{ 
@@ -144,16 +149,14 @@ class MCTruthResidual
   }
   if(fmode == "pPb5" || fmode == "Pbp5"){
     pt/=fitResidualPt->Eval(pt);
-    if(fmode == "pPb5"){
-      if (pt > 150) return pt;
-      int ipt = 0;
-      if(pt < 45 ) ipt = 0;
-      if(pt >= 45 && pt < 65) ipt = 1;
-      if(pt >= 65 && pt < 95) ipt = 2;
-      if(pt >= 95 && pt < 135) ipt = 3;
-      if(pt >= 135 && pt < 150) ipt = 4;
-      pt/=fitVsEta[ipt]->Eval(eta);
-    }
+    if (pt >= 150) return pt;
+    int ipt = 0;
+    if(pt < 45 ) ipt = 0;
+    if(pt >= 45 && pt < 65) ipt = 1;
+    if(pt >= 65 && pt < 95) ipt = 2;
+    if(pt >= 95 && pt < 135) ipt = 3;
+    if(pt >= 135 && pt < 150) ipt = 4;
+    pt/=fitVsEta[ipt]->Eval(eta);
   }
   return pt;
  }
