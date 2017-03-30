@@ -87,23 +87,25 @@ class MCTruthResidual
    fitVsEta[2] = new TF1("fitvseta2","(2.52492e-04)*x*x*x+(-7.56608e-04)*x*x+(-1.37451e-03)*x+(1.00309e+00)");
    fitVsEta[3] = new TF1("fitvseta3","(-1.05427e-03)*x*x*x+(3.46250e-04)*x*x+(5.30411e-04)*x+(9.99666e-01)");
    fitVsEta[4] = new TF1("fitvseta4","(-3.12681e-04)*x*x*x+(8.44498e-05)*x*x+(2.33284e-05)*x+(1.00136e+00)");
-
-   fitResidualPt = new TF1("fitResidualPt","(-6.45411e-01)/x+1.00520e+00");
+   fitResidualPt = new TF1("fitResidualPt","(-1.04339e+00)/x+(1.00349e+00)");
+  
   }
   else{ 
    nstep = 2;
    for(int istep = 0; istep < nstep; istep++){
-     fileUnf[istep] = new TFile(Form("residualMCTruth/recotoref_pp_20170128_step%d.root",istep));
+     fileUnf[istep] = new TFile(Form("residualMCTruth/recotoref_pp_20170330_step%d.root",istep));
      for(int ieta = 0; ieta < nEta; ieta++){
        fitUnf[istep][ieta] = (TF1*)fileUnf[istep]->Get(Form("fit2%d",ieta)); 
      }
    }
    for(int istep = 0; istep < nstep; istep++){
-    fileResMC[istep] = new TFile(Form("residualMCTruth/responseInEtaBinspp_yueshiL2L3_20170128_step%d.root",istep));
+    fileResMC[istep] = new TFile(Form("residualMCTruth/responseInEtaBinspp_yueshiL2L3_20170330_step%d.root",istep));
     for(int ieta = 0; ieta < nEta; ieta++){
      fitVsPt[istep][ieta] = (TF1*)fileResMC[istep]->Get(Form("fit2%d",ieta));
     }
    }
+   fitVsEta[0] = new TF1("fitvseta0","(4.82570e-04)*x*x*x*x + (1.79161e-04)*x*x*x + (-6.45958e-03)*x*x+ (7.70963e-04 )*x + (1.00127e+00)");
+
   }
   fitSmear[0] = new TF1("fitSmear0","(-1.75377e-05)*x+7.06741e-02",40.,200.);
   fitSmear[1] = new TF1("fitSmear1","(-3.10860e-04)*x+9.77457e-02",40.,200.);  
@@ -149,15 +151,22 @@ class MCTruthResidual
   }
   if(fmode == "pPb5" || fmode == "Pbp5"){
     pt/=fitResidualPt->Eval(pt);
-    if (pt >= 150) return pt;
-    int ipt = 0;
-    if(pt < 45 ) ipt = 0;
-    if(pt >= 45 && pt < 65) ipt = 1;
-    if(pt >= 65 && pt < 95) ipt = 2;
-    if(pt >= 95 && pt < 135) ipt = 3;
-    if(pt >= 135 && pt < 150) ipt = 4;
-    pt/=fitVsEta[ipt]->Eval(eta);
-  }
+    if(fmode == "pPb5"){
+      if (pt >= 150) return pt;
+      int ipt = 0;
+      if(pt < 45 ) ipt = 0;
+      if(pt >= 45 && pt < 65) ipt = 1;
+      if(pt >= 65 && pt < 95) ipt = 2;
+      if(pt >= 95 && pt < 135) ipt = 3;
+      if(pt >= 135 && pt < 150) ipt = 4;
+      pt/=fitVsEta[ipt]->Eval(eta);
+    }
+  }else{
+   if(pt < 45 ){
+     pt/=fitVsEta[0]->Eval(eta);
+   }
+ }
+
   return pt;
  }
  
